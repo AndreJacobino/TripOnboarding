@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TripOnboarding.View.OnboardingPage"
+             xmlns:models="clr-namespace:TripOnboarding.Models"
+             xmlns:viewmodels="clr-namespace:TripOnboarding.VIewModels"
+             BackgroundColor="#FFFFFF"
+             Shell.NavBarIsVisible="False"
+             Title="OnboardingPage">
+    
+    <Grid RowDefinitions="*, Auto,Auto" Padding="5,10">
+    <CarouselView Grid.Row="0"
+                  Position="{Binding Posicao}"
+                  IndicatorView="Indicador"
+                  Loop="False"
+                  ItemsSource="{Binding Itens}">
+
+        <CarouselView.ItemTemplate>
+            <DataTemplate x:DataType="models:OnboardingItem">
+                <VerticalStackLayout VerticalOptions="Center"
+                                     Spacing="20">
+                    <Label Text="{Binding Titulo}"
+                           FontSize="28"
+                           HorizontalTextAlignment="Center"
+                           TextColor="#333"
+                           FontAttributes="Bold"
+                           />
+
+                    <Image Source="{Binding ImagemUrl}"
+                           Aspect="AspectFit"
+                           HeightRequest="350"
+                           />
+
+                    <Label Text="{Binding Descricao}"
+                           FontSize="18"
+                           TextColor="#333"
+                           HorizontalTextAlignment="Center"
+                           />
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CarouselView.ItemTemplate>
+    </CarouselView>
+
+    <IndicatorView x:Name="Indicador"
+                   Grid.Row="1"
+                   HorizontalOptions="Center"
+                   IndicatorColor="#FFE3ED"
+                   SelectedIndicatorColor="#FF1568"
+                   IndicatorSize="14"/>
+
+        <Grid ColumnDefinitions="*,*"
+          Grid.Row="2"
+          ColumnSpacing="15">
+
+        <Button Grid.Column="0"
+                    Text="Get started"
+                    BackgroundColor="#FF1568"/>
+
+        <Button Grid.Column="1"
+                Command="{Binding proximoCommand}"
+                Text="Next"
+                BackgroundColor="#4EA717"
+                IsVisible="{Binding ExibirBotao}"/>
+        </Grid>
+    </Grid>
+    
+</ContentPage>
